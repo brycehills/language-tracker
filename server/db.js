@@ -1,6 +1,6 @@
 // server/db.js
 // purpose: connection module for DB - now we can query the database with this data
-// this connection logic can be reused to query 
+//          aka: this connection logic can be reused to query 
 import pkg from 'pg';
 const { Pool } = pkg;
 
