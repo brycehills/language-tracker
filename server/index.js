@@ -30,8 +30,8 @@ app.get('/test-db', async (req, res) => {
     }
   });
 
-  // display sessions table data
-  app.get('api/sessions', async (req,res) => {
+  // sessions get endpoint
+  app.get('/api/sessions', async (req,res) => {
     try{
     const result = await pool.query('SELECT * FROM study_sessions ORDER BY date DESC');
     res.json(result.rows);

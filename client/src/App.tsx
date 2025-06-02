@@ -1,13 +1,13 @@
 import SessionForm from './SessionForm';
+import SessionList from './SessionList';
 
 function App() {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100 p-4">
-      <div className="bg-white p-6 rounded-lg shadow-md w-full max-w-md">
-        <h1 className="text-2xl font-bold mb-4 text-center text-blue-600">
-          Language Study Tracker
-        </h1>
-        <SessionForm />
+    <div className="min-h-screen p-6 bg-gray-50">
+      <h1 className="text-3xl font-bold mb-6 text-center">🧠 Language Tracker</h1>
+      <SessionForm />
+      <div className="mt-8">
+        <SessionList />
       </div>
     </div>
   );
