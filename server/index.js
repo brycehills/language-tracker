@@ -1,7 +1,7 @@
 import express from 'express';  // express framework
 import cors from 'cors';        // middleware - cross origin reqs
 
-import pool from './db.js';     // same folder
+import pool from './db.js';     // same folder - config
 
 const app = express();          // create express object
 
@@ -12,7 +12,7 @@ app.use(express.json());        // parse incoming requsts with json
 /* ----------------GET REQUESTS ---------------*/
 // get route at root path - 
 app.get('/', (req, res) => {
-    res.send('Backend is running~'); //confirm server is running
+    res.send('Backend is running~'); //confirm server is running test
 });
 
 // New route to get all language entries
@@ -43,27 +43,36 @@ app.get('/test-db', async (req, res) => {
 
 /* ----------------POST REQUESTS ---------------*/
 app.post('/api/sessions', async (req,res) => {
-    const {language, minutes, date, notes} = req.body;
+
+    // req body attributes
+    const { language, 
+            date, 
+            notes, 
+            reading_minutes = 0, 
+            writing_minutes = 0, 
+            listening_minutes = 0, 
+            speaking_minutes = 0,
+          } = req.body;
 
     // error checking for missing data - cant insert null
-    if (!language || !minutes || !date){
-        return res.status(400).json({error: 'language, minutes, and date are required.'});
+    if (!language || !date){
+        return res.status(400).json({error: 'language and date are required.'});
     }
 
     // otherwiser perform insert into 
     try {
-        const result = await pool.query(
-          `INSERT INTO study_sessions (language, minutes, date, notes)
-           VALUES ($1, $2, $3, $4)
-           RETURNING *`,
-          [language, minutes, date, notes || null]
-        );
-        res.status(201).json({ session: result.rows[0] });
-      } catch (error) {
-        console.error('Insert error:', error);
-        res.status(500).json({ error: 'Database error' });
-      }
-
+      const result = await pool.query(
+        `INSERT INTO study_sessions
+        (language, date, notes, reading_minutes, writing_minutes, listening_minutes, speaking_minutes)
+        VALUES ($1, $2, $3, $4, $5, $6, $7)
+        RETURNING *`,
+        [language, date, notes || null, reading_minutes, writing_minutes, listening_minutes, speaking_minutes]
+      );
+      res.status(201).json({ session: result.rows[0] });
+    } catch (error) {
+      console.error('Insert error:', error);
+      res.status(500).json({ error: 'Database error' });
+    }
 });
 
 
@@ -75,9 +84,4 @@ app.listen(PORT, () => {
     console.log(`🚀 Server running on port ${PORT}`);
   });
 
-// Sample data to simulate a database
-const languageEntries = [
-    { id: 1, language: 'Japanese', studiedOn: '2025-05-27', notes: 'Reviewed JLPT N5 verbs' },
-    { id: 2, language: 'Spanish', studiedOn: '2025-05-26', notes: 'Practiced irregular verbs' },
-  ];
-  
+

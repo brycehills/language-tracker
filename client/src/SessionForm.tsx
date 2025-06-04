@@ -5,7 +5,10 @@ export default function SessionForm() {
     // state var to store user typed info
     const [formData, setFormData] = useState({
         language: '',
-        minutes: '',
+        reading_minutes: '',
+        writing_minutes: '',
+        listening_minutes: '',
+        speaking_minutes: '',
         date: '',
         notes: '',
     });
@@ -25,7 +28,11 @@ export default function SessionForm() {
             },
             body: JSON.stringify({ //json object stored in body to be parsed later
               ...formData,
-              minutes: Number(formData.minutes), //conv to str
+              //str to int conversions
+              reading_minutes: Number(formData.reading_minutes), 
+              writing_minutes: Number(formData.writing_minutes),
+              listening_minutes: Number(formData.listening_minutes),
+              speaking_minutes: Number(formData.speaking_minutes),
             }),
           });
 
@@ -50,18 +57,45 @@ export default function SessionForm() {
                 required
               />
               <input
-                type="number"
-                name="minutes"
-                placeholder="Minutes"
-                value={formData.minutes}
+                type="date"
+                name="date"
+                value={formData.date}
                 onChange={handleChange}
                 className="w-full p-2 border rounded"
                 required
               />
               <input
-                type="date"
-                name="date"
-                value={formData.date}
+                type="number"
+                name="reading_minutes"
+                placeholder="reading_minutes"
+                value={formData.reading_minutes}
+                onChange={handleChange}
+                className="w-full p-2 border rounded"
+                required
+              />
+              <input
+                type="number"
+                name="writing_minutes"
+                placeholder="writing_minutes"
+                value={formData.writing_minutes}
+                onChange={handleChange}
+                className="w-full p-2 border rounded"
+                required
+              />
+              <input
+                type="number"
+                name="listening_minutes"
+                placeholder="listening_minutes"
+                value={formData.listening_minutes}
+                onChange={handleChange}
+                className="w-full p-2 border rounded"
+                required
+              />
+              <input
+                type="number"
+                name="speaking_minutes"
+                placeholder="speaking_minutes"
+                value={formData.speaking_minutes}
                 onChange={handleChange}
                 className="w-full p-2 border rounded"
                 required
