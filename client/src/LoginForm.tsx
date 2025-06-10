@@ -12,6 +12,7 @@ function LoginForm() {
   const [success, setSuccess] = useState('');
   const [loading, setLoading] = useState(false);
 
+
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     setError('');
@@ -28,10 +29,12 @@ function LoginForm() {
 
       if (res.ok && data.token) {
         auth.setToken(data.token);
-        auth.setUser(data.email || '');
+        auth.setUser(data.user?.email || '');
         setSuccess('Login successful!');
         setLoading(false);
-        navigate('/'); // Redirect immediately to main page
+        setTimeout(() => {
+          navigate('/', { replace: true });
+        }, 500);
       } else {
         setError(data.error || 'Login failed');
         setLoading(false);

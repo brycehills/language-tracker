@@ -58,10 +58,6 @@ app.get('/api/languages', (req, res) => {
 // Add new session for logged-in user
 app.post('/api/sessions', authenticateToken, async (req, res) => {
 
-  console.log('📥 Incoming POST /api/sessions');
-  console.log('🧾 Request body:', req.body);
-  console.log('🔐 Authenticated user:', req.user);
-
 
   const {
     language,
