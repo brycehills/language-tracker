@@ -28,8 +28,8 @@ function LoginForm() {
       const data = await res.json();
 
       if (res.ok && data.token) {
-        auth.setToken(data.token);
-        auth.setUser(data.email || '');
+        auth.setToken(data.token); // <-- set the token
+        auth.setUser(data.email || ''); // optionally set user/email
         setSuccess('Login successful!');
         setLoading(false);
         setTimeout(() => {

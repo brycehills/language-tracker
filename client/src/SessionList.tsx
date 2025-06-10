@@ -1,42 +1,9 @@
-import useAuth from './AuthContext';
-import { useEffect, useState } from 'react';
 
-
-// what this object should look like - same as the input formdata
-type Session = {
-  id: number;
-  date: string;
-  language: string;
-  reading_minutes:number;
-  writing_minutes: number;
-  listening_minutes:number;
-  speaking_minutes:number;
-  notes?: string;
+type SessionListProps = {
+  sessions: Session[];
 };
 
-//define fxn
-export default function SessionList() {
-  const { token } = useAuth();
-  const [sessions, setSessions] = useState<Session[]>([]);
-
-
-  // get data from backend
-  useEffect(() => {
-    if (!token) return;
-
-    fetch('http://localhost:3000/api/sessions', {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    })
-      .then((res) => res.json())
-      .then((data) => setSessions(data))
-      .catch((err) => console.error('Error fetching sessions:', err));
-  }, [token]);
-
-
-  //display front end - app.tsx - 
-  // *** loop over session using map to iterate DB
+export default function SessionList({ sessions }: SessionListProps) {
   return (
     <div className="p-4">
       <h2 className="text-xl font-bold mb-4">Study Entries</h2>
@@ -58,3 +25,15 @@ export default function SessionList() {
     </div>
   );
 }
+
+// If you don't have a shared Session type, keep this in the file:
+export type Session = {
+  id: number;
+  date: string;
+  language: string;
+  reading_minutes: number;
+  writing_minutes: number;
+  listening_minutes: number;
+  speaking_minutes: number;
+  notes?: string;
+};
