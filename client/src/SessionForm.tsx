@@ -1,6 +1,7 @@
-import { useState } from 'react';
+import useAuth from './AuthContext';
+import { useState, useEffect } from 'react';
 
-export default function SessionForm() {
+export default function SessionForm({ onSessionSaved }: { onSessionSaved?: () => void }) {
 
     // state var to store user typed info
     const [formData, setFormData] = useState({
@@ -13,18 +14,25 @@ export default function SessionForm() {
         notes: '',
     });
 
+    const { token } = useAuth();
+
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
       };
     
       const handleSubmit = async (e: React.FormEvent) => {
-        e.preventDefault();
         
+        // test -- is this the correct token?
+        console.log('Submitting session with token:', token);
+
+        e.preventDefault(); 
+
         // add post request to backend api/sessions
         const response = await fetch('http://localhost:3000/api/sessions', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
+              'Authorization': `Bearer ${token}`,
             },
             body: JSON.stringify({ //json object stored in body to be parsed later
               ...formData,
@@ -40,6 +48,22 @@ export default function SessionForm() {
             const data = await response.json();
             console.log('Session saved:', data);
             alert('Session saved successfully!');
+
+            // Reset form
+            setFormData({
+              language: '',
+              reading_minutes: '',
+              writing_minutes: '',
+              listening_minutes: '',
+              speaking_minutes: '',
+              date: '',
+              notes: '',
+            });
+
+            // Notify parent component
+            if (onSessionSaved) {
+              onSessionSaved();
+            }
           } else {
             alert('Failed to save session.');
           }
@@ -108,7 +132,7 @@ export default function SessionForm() {
                 className="w-full p-2 border rounded"
               />
               <button type="submit" className="bg-blue-600 text-white px-4 py-2 rounded">
-                Save Session
+                Save Entry
               </button>
             </form>
           );

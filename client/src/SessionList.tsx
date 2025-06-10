@@ -1,3 +1,4 @@
+import useAuth from './AuthContext';
 import { useEffect, useState } from 'react';
 
 
@@ -15,23 +16,30 @@ type Session = {
 
 //define fxn
 export default function SessionList() {
+  const { token } = useAuth();
   const [sessions, setSessions] = useState<Session[]>([]);
 
 
   // get data from backend
   useEffect(() => {
-    fetch('http://localhost:3000/api/sessions')
+    if (!token) return;
+
+    fetch('http://localhost:3000/api/sessions', {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
       .then((res) => res.json())
       .then((data) => setSessions(data))
       .catch((err) => console.error('Error fetching sessions:', err));
-  }, []);
+  }, [token]);
 
 
   //display front end - app.tsx - 
   // *** loop over session using map to iterate DB
   return (
     <div className="p-4">
-      <h2 className="text-xl font-bold mb-4">Study Sessions</h2>
+      <h2 className="text-xl font-bold mb-4">Study Entries</h2>
       <ul className="space-y-4">
         <div className='h-64 overflow-y-auto border p-4 rounded-xl shadow-md'>
         {sessions.map((session) => (
