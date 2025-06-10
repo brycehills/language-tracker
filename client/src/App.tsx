@@ -1,3 +1,5 @@
+import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 import SessionForm from "./SessionForm";
 import SessionList from "./SessionList";
 import StudyGraph from "./components/StudyGraph";
@@ -7,6 +9,13 @@ import LoginForm from "./LoginForm";
 
 export default function App() {
   const { user, logout } = useAuth();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (user) {
+      navigate('/');
+    }
+  }, [user, navigate]);
 
   if (!user) {
     return <LoginForm />;

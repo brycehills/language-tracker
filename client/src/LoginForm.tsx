@@ -29,7 +29,7 @@ function LoginForm() {
 
       if (res.ok && data.token) {
         auth.setToken(data.token);
-        auth.setUser(data.user?.email || '');
+        auth.setUser(data.email || '');
         setSuccess('Login successful!');
         setLoading(false);
         setTimeout(() => {
