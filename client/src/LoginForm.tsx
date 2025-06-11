@@ -1,6 +1,6 @@
 // LoginForm.tsx
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import useAuth from './AuthContext';
 
 function LoginForm() {
@@ -82,6 +82,13 @@ function LoginForm() {
       >
         {loading ? 'Logging in...' : 'Login'}
       </button>
+      
+      <p className="text-sm mt-4">
+        Don’t have an account?{' '}
+        <Link to="/register" className="text-blue-500 hover:underline">
+          Register here
+        </Link>
+      </p>
     </form>
   );
 }
