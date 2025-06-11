@@ -1,4 +1,3 @@
-
 type SessionListProps = {
   sessions: Session[];
 };
@@ -6,27 +5,39 @@ type SessionListProps = {
 export default function SessionList({ sessions }: SessionListProps) {
   return (
     <div className="p-4">
-      <h2 className="text-xl font-bold mb-4">Study Entries</h2>
+      {/* <h2 className="text-xl font-bold mb-4">Study Entries</h2> */}
       <ul className="space-y-4">
-        <div className='h-64 overflow-y-auto border p-4 rounded-xl shadow-md'>
-        {sessions.map((session) => (
-          <li key={session.id} className="p-4 border rounded-lg shadow">
-            <p><strong>Language:</strong> {session.language}</p>
-            <p><strong>Reading Time:</strong> {session.reading_minutes}</p>
-            <p><strong>Writing Time:</strong> {session.writing_minutes}</p>
-            <p><strong>Listening Time:</strong> {session.listening_minutes}</p>
-            <p><strong>Speaking Time:</strong> {session.speaking_minutes}</p>
-            <p><strong>Date:</strong> {new Date(session.date).toLocaleDateString()}</p>
-            {session.notes && <p><strong>Notes:</strong> {session.notes}</p>}
-          </li>
-        ))}
+        <div className="h-[28rem] overflow-y-auto border p-4 rounded-xl shadow-md">
+          {sessions.map((session) => (
+            <li key={session.id} className="p-4 border rounded-lg shadow bg-gray-50">
+              <dl className="grid grid-cols-2 gap-x-2 gap-y-1">
+                <dt className="font-semibold">Language:</dt>
+                <dd>{session.language}</dd>
+                <dt className="font-semibold">Reading:</dt>
+                <dd>{session.reading_minutes} min</dd>
+                <dt className="font-semibold">Writing:</dt>
+                <dd>{session.writing_minutes} min</dd>
+                <dt className="font-semibold">Listening:</dt>
+                <dd>{session.listening_minutes} min</dd>
+                <dt className="font-semibold">Speaking:</dt>
+                <dd>{session.speaking_minutes} min</dd>
+                <dt className="font-semibold">Date:</dt>
+                <dd>{new Date(session.date).toLocaleDateString()}</dd>
+                {session.notes && (
+                  <>
+                    <dt className="font-semibold">Notes:</dt>
+                    <dd>{session.notes}</dd>
+                  </>
+                )}
+              </dl>
+            </li>
+          ))}
         </div>
       </ul>
     </div>
   );
 }
 
-// If you don't have a shared Session type, keep this in the file:
 export type Session = {
   id: number;
   date: string;
