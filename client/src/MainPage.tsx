@@ -5,6 +5,7 @@ import useAuth from './AuthContext';
 import SessionForm from './SessionForm';
 import SessionList from './SessionList';
 import StudyGraph from './components/StudyGraph';
+import Suggestions from './Suggestions'; // <-- Import Suggestions component
 import type { Session } from './types'; // <-- Add this line
 
 export default function MainPage() {
@@ -36,22 +37,6 @@ export default function MainPage() {
 const handleLogout = () => {
   logout();
 };
-
-  // return (
-  //   <div className="p-4">
-  //     <div className="flex justify-end mb-4">
-  //       <button
-  //         onClick={logout}
-  //         className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600"
-  //       >
-  //         Logout
-  //       </button>
-  //     </div>
-  //     <SessionForm onSessionSaved={fetchSessions} sessions={sessions} />
-  //     <SessionList sessions={sessions} />
-  //     <StudyGraph sessions={sessions} />
-  //   </div>
-  // );
 
   return (
     <div className="min-h-screen bg-gray-50 p-6">
@@ -93,6 +78,10 @@ const handleLogout = () => {
           </div>
         </div>
       </div>
+
+      {sessions.length > 0 && (
+  <Suggestions session={sessions[0]} />
+  )}
 
     </div>
   );
