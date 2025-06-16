@@ -33,6 +33,10 @@ export default function MainPage() {
     return <Navigate to="/login" replace />;
   }
 
+const handleLogout = () => {
+  logout();
+};
+
   // return (
   //   <div className="p-4">
   //     <div className="flex justify-end mb-4">
@@ -51,30 +55,45 @@ export default function MainPage() {
 
   return (
     <div className="min-h-screen bg-gray-50 p-6">
-      <div className="max-w-6xl mx-auto space-y-8">
-        <h1 className="text-3xl font-bold text-center text-gray-800">
-          Language Tracker Dashboard
-        </h1>
+            <div className="flex justify-end p-4">
+      <button
+        onClick={handleLogout}
+        className="px-4 py-2 bg-red-500 hover:bg-red-600 text-white font-semibold rounded-md shadow"
+      >Logout
+      </button>
+    </div>
+      <div className="max-w-6xl mx-auto space-y-10 px-4">
+        <div className="text-center space-y-2">
+          <h1 className="text-5xl font-bold text-indigo-600 tracking-tight flex justify-center items-center gap-3">
+            📚 Language Tracker
+          </h1>
+          <p className="text-gray-600 text-lg">
+            Visualize your progress and stay on top of your language learning goals!
+          </p>
+        </div>
+
+
 
         {/* Graph at top center */}
-        <div className="bg-white shadow-md rounded-xl p-6">
+        <div className="bg-white border border-gray-200 shadow-sm rounded-lg p-6">
           <h2 className="text-xl font-semibold mb-4 text-gray-700 text-center">Study Activity</h2>
           <StudyGraph sessions={sessions} />
         </div>
 
         {/* Form and List side by side */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div className="bg-white shadow-md rounded-xl p-6">
+          <div className="bg-white border border-gray-200 shadow-sm rounded-lg p-6">
             <h2 className="text-xl font-semibold mb-4 text-gray-700">Add New Session</h2>
             <SessionForm onSessionSaved={fetchSessions} sessions={sessions} />
           </div>
 
-          <div className="flex-1 overflow-y-auto border p-4 rounded-xl shadow-md">
+          <div className="flex-1 overflow-y-auto bg-white border border-gray-200 p-4 rounded-lg shadow-sm">
             <h2 className="text-xl font-semibold mb-4 text-gray-700">Study Session List</h2>
             <SessionList sessions={sessions} />
           </div>
         </div>
       </div>
+
     </div>
   );
 }

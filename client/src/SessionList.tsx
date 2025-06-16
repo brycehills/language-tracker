@@ -7,9 +7,9 @@ export default function SessionList({ sessions }: SessionListProps) {
     <div className="p-4">
       {/* <h2 className="text-xl font-bold mb-4">Study Entries</h2> */}
       <ul className="space-y-4">
-        <div className="h-[28rem] overflow-y-auto border p-4 rounded-xl shadow-md">
+        <div className="h-[28rem] overflow-y-auto border border-gray-200 p-4 rounded-xl shadow-sm bg-gray-50">
           {sessions.map((session) => (
-            <li key={session.id} className="p-4 border rounded-lg shadow bg-gray-50">
+            <li key={session.id} className="p-4 border border-gray-300 rounded-lg shadow-sm bg-white hover:shadow-md transition-shadow">
               <dl className="grid grid-cols-2 gap-x-2 gap-y-1">
                 <dt className="font-semibold">Language:</dt>
                 <dd>{session.language}</dd>
