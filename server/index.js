@@ -4,14 +4,19 @@ import dotenv from 'dotenv';
 import pool from './db.js';
 import authRoutes from './auth.js';
 import authenticateToken from './middleware/authenticateToken.js';
+import gptRoutes from './routes/gpt.js';
 
 
 dotenv.config();
 const app = express();
 
+
 // Middleware
 app.use(cors());
 app.use(express.json());
+
+//AI integration route
+app.use('/api/gpt', gptRoutes);
 
 // Auth routes (register + login)
 app.use('/api/auth', authRoutes);
