@@ -129,7 +129,7 @@ Response:
 
 ```json
 {
-  "suggestions": "Next time, review active/passive transformations. Try listening to a Japanese podcast."
+  "suggestions": "via OpenAI (example): Next time, review active/passive transformations. Try listening to a Japanese podcast."
 }
 ```
 
@@ -149,5 +149,5 @@ Response:
 
 **Bryce Hills**  
 IT Consultant | Full-Stack Dev | CS @ UCR  
-📫 [your-email@example.com]  
-🌐 [linkedin.com/in/yourprofile](#)
+📫 [hillsbryce0@gmail.com]  
+🌐 [https://www.linkedin.com/in/brycehills1/](#)
