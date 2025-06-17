@@ -46,7 +46,9 @@ export default function Suggestions({ session }: { session: Session }) {
       </button>
       {suggestion && (
         <div className="mt-6 bg-white border border-blue-100 rounded-lg p-4 shadow-inner">
-          <ReactMarkdown className="prose prose-blue">{suggestion}</ReactMarkdown>
+          <div className="prose prose-blue">
+            <ReactMarkdown>{suggestion}</ReactMarkdown>
+          </div>
         </div>
       )}
     </div>
