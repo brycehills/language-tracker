@@ -11,7 +11,7 @@
 
 | Main Dashboard | AI Suggestions |
 |----------------|----------------|
-| ![screenshot-placeholder-1](./screenshots/main.pdf) | ![screenshot-placeholder-2](./screenshots/AI.png) |
+| ![screenshot-placeholder-1](./screenshots/main.jpg) | ![screenshot-placeholder-2](./screenshots/AI.png) |
 
 > Replace `./screenshots/*.png` with actual screenshots of your app. Include:
 > - Login screen
