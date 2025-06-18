@@ -13,7 +13,7 @@
 |----------------|----------------|
 | ![screenshot-placeholder-1](./screenshots/main.jpg) | ![screenshot-placeholder-2](./screenshots/AI.png) |
 
-> Replace `./screenshots/*.png` with actual screenshots of your app. Include:
+> Screenshots Include:
 > - Login screen
 > - Study session form
 > - Auto-updating session list
