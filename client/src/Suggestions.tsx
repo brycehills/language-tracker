@@ -25,7 +25,7 @@ export default function Suggestions({ session }: { session: Session }) {
   };
 
   return (
-    <div className="max-w-xl mx-auto mt-8 bg-gradient-to-br from-blue-50 to-white border-l-4 border-blue-400 rounded-xl shadow-lg p-6">
+    <div className="max-w-2xl w-full mx-auto mt-8 bg-gradient-to-br from-blue-50 to-white border-l-4 border-blue-400 rounded-xl shadow-lg p-6">
       <div className="flex items-center mb-3">
         <div className="bg-blue-100 text-blue-600 rounded-full p-2 mr-3">
           <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -45,7 +45,7 @@ export default function Suggestions({ session }: { session: Session }) {
         {loading ? 'Getting Suggestions...' : 'Get AI Suggestions'}
       </button>
       {suggestion && (
-        <div className="mt-6 bg-white border border-blue-100 rounded-lg p-4 shadow-inner">
+        <div className="mt-6 bg-white border border-blue-100 rounded-lg p-4 shadow-inner max-h-[20rem] overflow-y-auto">
           <div className="prose prose-blue">
             <ReactMarkdown>{suggestion}</ReactMarkdown>
           </div>
